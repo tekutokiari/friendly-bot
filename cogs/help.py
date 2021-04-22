@@ -45,7 +45,7 @@ class HelpCommand(commands.Cog):
             embed.add_field(name=f"{funcog.qualified_name}", value=f"```{_funcommands}```",inline=False)
             embed.add_field(name=f"{reputationcog.qualified_name}",value=f"```{_repcommands}```",inline=False)
             embed.add_field(name=f"{infocog.qualified_name}", value=f"```{_infocmds}```",inline=False)
-            embed.set_footer(text=f"For more info do: {ctx.prefix}help 'command'",icon_url=ctx.message.author.avatar_url)
+            embed.set_footer(text=f"For more info do: {ctx.prefix}help 'command'",icon_url=ctx.author.avatar_url)
             await ctx.send(embed=embed)
 
     

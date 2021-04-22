@@ -13,6 +13,7 @@ class Fun(commands.Cog):
             await ctx.send(ctx.author.avatar_url)
         else:
             await ctx.send(user.avatar_url)
+        
     @commands.command()
     async def bite(self,ctx,user: discord.Member=None):
         if not user:
