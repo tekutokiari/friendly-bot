@@ -55,7 +55,7 @@ class OwnerCommands(commands.Cog):
                 await ctx.send(f'```py\n{value}\n```')
             else:
                 _last_result = ret
-                await ctx.send(f'```py\n{value}{ret}\n```')      
+                await ctx.send(f'```py\n{value}{ret}\n```')
     @_eval.error
     async def _eval_error(self,ctx,error):
         if isinstance(error,UnboundLocalError):
