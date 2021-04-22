@@ -15,11 +15,11 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Logged in")
-        with open('Commands/cooldown.json', 'r') as f:
+        with open('./cooldown.json', 'r') as f:
             cds = json.load(f)
         for key,value in list(cds.items()):
             cds[str(key)] = False
-        with open('Commands/cooldown.json', 'w') as file:
+        with open('./cooldown.json', 'w') as file:
             json.dump(cds,file,indent=4)
     
     @commands.Cog.listener()
@@ -42,7 +42,7 @@ class Events(commands.Cog):
                 print(me)
         if not message.author.bot:
             ok = False
-            with open('Commands/reps.json', 'r') as f:
+            with open('./reps.json', 'r') as f:
                 rep = json.load(f)
             for key,value in list(rep.items()):
                 if str(message.author.id) == key:
@@ -50,7 +50,7 @@ class Events(commands.Cog):
             if ok == False:        
                 rep[str(message.author.id)] = 0
                 print(1)
-                with open('Commands/reps.json', 'w') as file:
+                with open('./reps.json', 'w') as file:
                     json.dump(rep,file,indent=4)
                    
     @commands.Cog.listener()
