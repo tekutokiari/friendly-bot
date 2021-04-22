@@ -24,7 +24,7 @@ class Reputation(commands.Cog):
     @commands.command()
     async def checkrep(self,ctx, user : discord.User=None):
         if not user:
-            with open('reps.json', 'r') as f:
+            with open('cogs/reps.json', 'r') as f:
                 rep = json.load(f)
                 avatarurl = ctx.message.author.avatar_url
                 embed = discord.Embed(title=ctx.message.author.name + "#" + ctx.message.author.discriminator + "'s reputation points",timestamp=datetime.datetime.utcnow())
@@ -32,7 +32,7 @@ class Reputation(commands.Cog):
                 embed.add_field(name="Reputation points", value=rep[str(ctx.message.author.id)])
                 await ctx.send(embed=embed)
         else:
-            with open('reps.json', 'r') as f:
+            with open('cogs/reps.json', 'r') as f:
                 rep = json.load(f)
                 avatarurl = user.avatar_url
                 embed = discord.Embed(title=user.name + "#" + user.discriminator + "'s reputation points",timestamp=datetime.datetime.utcnow())
@@ -45,17 +45,17 @@ class Reputation(commands.Cog):
         if user.id == ctx.message.author.id:
             await ctx.send("Need to specify a different user to give a reputation point to!")
         else:
-            with open('cooldown.json', 'r') as f:
+            with open('cogs/cooldown.json', 'r') as f:
                 cds = json.load(f)
             if cds[str(ctx.message.author.id)] == False:
-                with open('reps.json', 'r') as f:
+                with open('cogs/reps.json', 'r') as f:
                     rep = json.load(f)
                 rep[str(user.id)] = rep[str(user.id)] + 1
-                with open('reps.json', 'w') as f:
+                with open('cogs/reps.json', 'w') as f:
                     json.dump(rep, f, indent=4)
                     await ctx.send(f"{ctx.message.author.mention} gave a reputation point to {user.mention}")
                 cds[str(ctx.message.author.id)] = True
-                with open('cooldown.json', 'w') as file:
+                with open('cogs/cooldown.json', 'w') as file:
                     json.dump(cds,file,indent=4)
                 self.bot.loop.create_task(timeouttask(ctx))
             else:
@@ -69,18 +69,18 @@ class Reputation(commands.Cog):
     @commands.is_owner()
     async def clearreps(self,ctx):
         guild = ctx.guild
-        with open('reps.json', 'r') as f:
+        with open('cogs/reps.json', 'r') as f:
             rep = json.load(f)
-        with open('reps.json', 'w') as file:
+        with open('cogs/reps.json', 'w') as file:
             for x in self.bot.guilds:
                 gld = await self.bot.fetch_guild(x.id)
                 async for member in gld.fetch_members(limit=1000):
                     if not member.bot:
                         rep[str(member.id)] = reps
             json.dump(rep,file,indent=4)
-        with open('cooldown.json', 'r') as f:
+        with open('cogs/cooldown.json', 'r') as f:
             cds = json.load(f)
-        with open('cooldown.json', 'w') as file:
+        with open('cogs/cooldown.json', 'w') as file:
             for x in self.bot.guilds:
                 gld = await self.bot.fetch_guild(x.id)
                 async for member in gld.fetch_members(limit=1000):
