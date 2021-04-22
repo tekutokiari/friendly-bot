@@ -4,8 +4,6 @@ from discord.ext import commands
 import discord
 import datetime
 
-from discord.ext.commands.core import command
-
 class HelpCommand(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
