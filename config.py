@@ -1,2 +1,2 @@
 prefix=".." 
-token= "Nzc4MDMzNDI4MTMzOTcwMDIy.X7MGGA.OQRXH9et65vAmvsk32x7TER3YX8"
+token= ""
